@@ -7,20 +7,29 @@ pipeline{  // root element of the pipeline, defines the entire pipeline structur
     stages {
         stage('Build') {
             steps {
+                script{ // Define the steps to execute in the Build stage, in this case we are using a script block to execute some shell commands, we are printing a message to indicate that we are building, then we are sleeping for 10 seconds to simulate a build process, after that we are printing the environment variables using the env command and finally we are printing a personalized message using the input parameter PERSON.
                 echo "Building the application..."
-                sh 'echo "Building..."' 
+                    sh 'echo "Building..."' 
+                }
+                
             }
         }
         stage('Test') {
             steps {
+                script{
                 echo "Running tests..."
-                sh 'echo "Testing..."'
+                  sh 'echo "Testing..."'
+                }
+                
             }
         }
         stage('Deploy') {
             steps {
+                script{
                 echo "Deploying the application..."
                 sh 'echo "Deploying..."'
+                }
+                
             }
         }
     }
