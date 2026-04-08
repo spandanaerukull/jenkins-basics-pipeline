@@ -3,20 +3,27 @@ pipeline{  // root element of the pipeline, defines the entire pipeline structur
     agent  {
         label 'AGENT-1' // this specifies that the pipeline should run on any available agent that has the label 'AGENT-1', this allows for flexibility in choosing where the pipeline will execute, as it can run on any node that is part of the Jenkins environment, whether it's a master or a slave node, as long as it has the specified label.
     } 
+    environment { // use this section to define environment variables that can be used throughout the pipeline, this is useful for storing values that are commonly used in multiple stages or steps, such as the name of the course or the version of the application being built.
+        COURSE = 'jenkins' // Define environment variables for the pipeline, in this case we are defining a variable named COURSE with the value 'jenkins', this variable can be accessed and used throughout the pipeline execution, for example in shell commands or in other stages, it allows for better maintainability and readability of the pipeline by centralizing the definition of commonly used values.
+    }
     // Build the application
     stages {
         stage('Build') {
             steps {
                 script{ // Define the steps to execute in the Build stage, in this case we are using a script block to execute some shell commands, we are printing a message to indicate that we are building, then we are sleeping for 10 seconds to simulate a build process, after that we are printing the environment variables using the env command and finally we are printing a personalized message using the input parameter PERSON.
-                echo "Building the application..."
-                    sh 'echo "Building..."' 
+                           // the script block allows us to write arbitrary Groovy code, which can be useful for more complex logic or when we want to use variables and control structures that are not available in the declarative syntax. In this case, we are using it to execute a series of shell commands that simulate a build process and print some information about the environment and the input parameters.
+                    sh """  
+                        echo "Hello Build" 
+                        env 
+                        
+                    """
                 }
                 
             }
         }
         stage('Test') {
             steps {
-                script{
+                script{ // Define the steps to execute in the Test stage, in this case we are using a script block to execute some shell commands, we are printing a message to indicate that we are running tests, then we are sleeping for 5 seconds to simulate a test process, after that we are printing the environment variables using the env command and finally we are printing a personalized message using the input parameter PERSON.
                 echo "Running tests..."
                   sh 'echo "Testing..."'
                 }
