@@ -53,7 +53,7 @@ pipeline{  // root element of the pipeline, defines the entire pipeline structur
                 }
             steps {
                 script{
-                    echo "Hello, ${params.PERSON}, nice to meet you."
+                    echo "Hello, ${PERSON}, nice to meet you."
                 echo "Deploying the application..."
                 sh 'echo "Deploying..."'
                 }
