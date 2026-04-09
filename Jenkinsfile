@@ -78,3 +78,4 @@ pipeline{  // root element of the pipeline, defines the entire pipeline structur
 }
 
 // delete dir is used to delete the data after the pipeline execution no matter if the build is successful or not, this is used to clean up the space and when we run the next time same pipeline it will be a clean slate, this is useful to avoid any issues that may arise from leftover files or artifacts from previous builds, it ensures that each build starts with a clean workspace and can help prevent conflicts or errors caused by leftover data.
+// explained the max jenkins pipeline 
