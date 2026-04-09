@@ -44,8 +44,16 @@ pipeline{  // root element of the pipeline, defines the entire pipeline structur
             }
         }
         stage('Deploy') {
+            input { // Define an input step that prompts the user for confirmation before proceeding with the deployment, this is useful to ensure that the deployment is intentional and to allow for any necessary checks or approvals before deploying to production. The input step includes a message asking if we should continue, an OK button with a custom label, and specifies that only certain users (alice and bob) are allowed to submit the input. Additionally, it defines a parameter for user input, allowing the user to specify a person's name that will be used in the deployment steps.
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
             steps {
                 script{
+                    echo "Hello, ${params.PERSON}, nice to meet you."
                 echo "Deploying the application..."
                 sh 'echo "Deploying..."'
                 }
